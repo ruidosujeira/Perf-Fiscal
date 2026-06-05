@@ -14,12 +14,12 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ruidosujeira/perf-linter.git"
+    "url": "git+https://github.com/ruidosujeira/Perf-Fiscal.git"
   },
   "bugs": {
-    "url": "https://github.com/ruidosujeira/perf-linter/issues"
+    "url": "https://github.com/ruidosujeira/Perf-Fiscal/issues"
   },
-  "homepage": "https://github.com/ruidosujeira/perf-linter#readme",
+  "homepage": "https://github.com/ruidosujeira/Perf-Fiscal#readme",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "files": [
@@ -36,7 +36,8 @@
     "clean": "rimraf dist",
     "test": "vitest run",
     "lint": "eslint ./src --ext .ts",
-    "benchmark": "ts-node scripts/benchmark.ts"
+    "benchmark": "ts-node scripts/benchmark.ts",
+    "prepublishOnly": "npm run clean && npm run build && npm run test"
   },
   "engines": {
     "node": ">=18"
