@@ -1,6 +1,9 @@
 // Thin JS bridge for the Rust core (napi-rs)
 // This module is optional. If the native addon is not present, callers should handle nulls.
 
+import * as fs from 'node:fs';
+import * as path from 'node:path';
+
 type NativeAddon = {
   parse_file(source: string): string; // returns JSON string of AST
   traverse_ast(astJson: string): { nodes_visited: number };
@@ -25,8 +28,6 @@ function tryLoadNative(): NativeAddon | null {
 
   // Common locations to probe
   try {
-    const path = require('node:path');
-    const fs = require('node:fs');
     const candidates: string[] = [];
 
     // 1) Adjacent to compiled JS (typical bundlers): perf_linter_core.node

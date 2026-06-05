@@ -1,4 +1,6 @@
 import { execFileSync } from 'node:child_process';
+import * as fs from 'node:fs';
+import * as path from 'node:path';
 
 // Minimal AST shape mirrored from Rust side for forward compatibility
 export type RustAstNode = {
@@ -13,8 +15,6 @@ function resolveCoreBinary(): string | null {
   const fromEnv = process.env.PERF_LINTER_CORE;
   if (fromEnv) return fromEnv;
   try {
-    const path = require('node:path');
-    const fs = require('node:fs');
     const candidate = path.resolve(
       __dirname,
       '..',

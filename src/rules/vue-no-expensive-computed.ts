@@ -86,6 +86,10 @@ export default createRule<Options, MessageIds>({
         // Recursively check children
         const keys = Object.keys(n) as (keyof TSESTree.Node)[];
         for (const key of keys) {
+          // Skip the `parent` back-reference to avoid infinite recursion.
+          if (key === 'parent') {
+            continue;
+          }
           const value = n[key];
           if (value && typeof value === 'object') {
             if (Array.isArray(value)) {
@@ -95,7 +99,7 @@ export default createRule<Options, MessageIds>({
                 }
               });
             } else if ('type' in value) {
-              traverse(value as TSESTree.Node);
+              traverse(value as unknown as TSESTree.Node);
             }
           }
         }

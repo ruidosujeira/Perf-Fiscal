@@ -60,7 +60,9 @@ function resolveCoreBinary(): string | null {
   try {
     const st = fs.statSync(candidate);
     if (st && st.isFile()) return candidate;
-  } catch {}
+  } catch {
+    // Binary not present — fall through to null and let callers use the JS path.
+  }
   return null;
 }
 

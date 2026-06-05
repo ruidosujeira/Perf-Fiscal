@@ -119,7 +119,21 @@ export default createRule<Options, MessageIds>({
         loopDepth++;
       },
 
-      'ForStatement:exit, ForInStatement:exit, ForOfStatement:exit, WhileStatement:exit, DoWhileStatement:exit'() {
+      // `:exit` must be declared per node type — ESLint only strips a single
+      // trailing `:exit`, so a grouped `A:exit, B:exit` selector is invalid.
+      'ForStatement:exit'() {
+        loopDepth--;
+      },
+      'ForInStatement:exit'() {
+        loopDepth--;
+      },
+      'ForOfStatement:exit'() {
+        loopDepth--;
+      },
+      'WhileStatement:exit'() {
+        loopDepth--;
+      },
+      'DoWhileStatement:exit'() {
         loopDepth--;
       },
 
