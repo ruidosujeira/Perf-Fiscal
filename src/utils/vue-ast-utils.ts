@@ -242,6 +242,10 @@ export function hasNestedReactivity(node: TSESTree.Node): boolean {
     // Recursively check children (simplified traversal)
     const keys = Object.keys(n) as (keyof TSESTree.Node)[];
     for (const key of keys) {
+      // Skip the `parent` back-reference to avoid infinite recursion.
+      if (key === 'parent') {
+        continue;
+      }
       const value = n[key];
       if (value && typeof value === 'object') {
         if (Array.isArray(value)) {
@@ -251,7 +255,7 @@ export function hasNestedReactivity(node: TSESTree.Node): boolean {
             }
           });
         } else if ('type' in value) {
-          traverse(value as TSESTree.Node);
+          traverse(value as unknown as TSESTree.Node);
         }
       }
     }
@@ -296,6 +300,10 @@ export function hasExpensiveOperations(node: FunctionNode): boolean {
     // Recursively check children
     const keys = Object.keys(n) as (keyof TSESTree.Node)[];
     for (const key of keys) {
+      // Skip the `parent` back-reference to avoid infinite recursion.
+      if (key === 'parent') {
+        continue;
+      }
       const value = n[key];
       if (value && typeof value === 'object') {
         if (Array.isArray(value)) {
@@ -305,7 +313,7 @@ export function hasExpensiveOperations(node: FunctionNode): boolean {
             }
           });
         } else if ('type' in value) {
-          traverse(value as TSESTree.Node);
+          traverse(value as unknown as TSESTree.Node);
         }
       }
     }

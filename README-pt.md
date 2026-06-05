@@ -215,6 +215,11 @@ Cada regra possui documentação detalhada em `docs/rules/<nome-da-regra>.md`.
 | `perf-fiscal/prefer-for-of` | 🔄 Uso de `map`/`forEach` apenas por efeitos colaterais | Migrar para `for...of` para clareza e performance | [docs/rules/prefer-for-of.md](docs/rules/prefer-for-of.md) |
 | `perf-fiscal/prefer-object-hasown` | 🧾 Padrões legados com `hasOwnProperty.call` | Usar `Object.hasOwn` | [docs/rules/prefer-object-hasown.md](docs/rules/prefer-object-hasown.md) |
 | `perf-fiscal/prefer-promise-all-settled` | 🤝 `Promise.all` esperando falhas parciais | Migrar para `Promise.allSettled` | [docs/rules/prefer-promise-all-settled.md](docs/rules/prefer-promise-all-settled.md) |
+| `perf-fiscal/vue-no-expensive-computed` | 🧮 Getters `computed` do Vue caros ou complexos demais | Dividir o getter ou tirar trabalho pesado da reatividade | [docs/rules/vue-no-expensive-computed.md](docs/rules/vue-no-expensive-computed.md) |
+| `perf-fiscal/vue-no-inefficient-watchers` | 👁️ Watchers Vue profundos, aninhados ou apenas derivativos | Observar fontes específicas ou migrar para `computed` | [docs/rules/vue-no-inefficient-watchers.md](docs/rules/vue-no-inefficient-watchers.md) |
+| `perf-fiscal/vue-optimize-reactivity` | ⚡ Uso indevido de `reactive()`/`ref()` e reatividade criada em loops | Usar `ref` para primitivos e tirar reatividade de dentro de loops | [docs/rules/vue-optimize-reactivity.md](docs/rules/vue-optimize-reactivity.md) |
+
+> As regras Vue fazem parte dos presets `vue` / `flat/vue`. Veja [Configuração](#destaques-de-configura%C3%A7%C3%A3o) para habilitá-las.
 
 ## Destaques de Configuração
 

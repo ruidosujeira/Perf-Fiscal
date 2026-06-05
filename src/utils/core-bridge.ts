@@ -1,4 +1,6 @@
 import { execFileSync } from 'node:child_process';
+import * as fs from 'node:fs';
+import * as path from 'node:path';
 
 type RedosResult = { safe: boolean; rewrite?: string | null };
 
@@ -9,11 +11,9 @@ function resolveCoreBinary(): string | null {
 
   // Common relative path when built with `cargo build --release`
   // rust/perf-linter-core/target/release/perf-linter-core
-  const path = require('node:path');
   const candidate = path.resolve(__dirname, '..', '..', 'rust', 'perf-linter-core', 'target', 'release', process.platform === 'win32' ? 'perf-linter-core.exe' : 'perf-linter-core');
   try {
     // Quick existence check via fs.statSync
-    const fs = require('node:fs');
     const st = fs.statSync(candidate);
     if (st && st.isFile()) return candidate;
   } catch {
